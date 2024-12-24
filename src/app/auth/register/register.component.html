@@ -48,6 +48,7 @@
                             id="password"
                             formControlName="password"
                             class="w-full"
+                            [inputStyleClass]="'w-full'"
                             [styleClass]="'w-full'"
                             [toggleMask]="true"
                             [feedback]="false"
@@ -93,6 +94,13 @@
                     {{ errorMessage }}
                 </p>
             }
+
+            <p-button
+                    styleClass="!flex ml-auto"
+                    text="true"
+                    label="Go to Login"
+                    routerLink="/login">
+            </p-button>
 
         </form>
     </div>

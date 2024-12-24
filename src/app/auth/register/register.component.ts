@@ -1,6 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {AuthService} from "../auth.service";
 import {DropdownModule} from "primeng/dropdown";
 import {Password} from "primeng/password";
@@ -17,7 +17,8 @@ import {Role} from "../models/create-user.dto";
     Password,
     IftaLabel,
     InputText,
-    Button
+    Button,
+    RouterLink
   ],
   templateUrl: './register.component.html'
 })

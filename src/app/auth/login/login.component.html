@@ -12,6 +12,7 @@
                             id="password"
                             formControlName="password"
                             class="w-full"
+                            inputStyleClass="w-full"
                             [styleClass]="'w-full'"
                             [toggleMask]="true"
                             [feedback]="false"
@@ -24,10 +25,14 @@
                     label="Login"
                     [disabled]="loginForm.invalid"
             ></p-button>
+
+            <p-button
+                    styleClass="!flex ml-auto"
+                    text="true"
+                    label="Go to Register"
+                    routerLink="/register">
+            </p-button>
         </form>
 
-        <a routerLink="/register" class="p-button font-bold mt-4">
-            Register
-        </a>
     </p-card>
 </div>
