@@ -14,7 +14,7 @@ export class AuthService {
   private readonly http = inject(HttpClient);
 
   login(username: string, password: string) {
-    return this.http.post<TokenDTO>(BASE_URL + 'login', { email: username, password });
+    return this.http.post<TokenDTO>(BASE_URL + 'login', { email: username, password }, { withCredentials: true});
   }
 
   register(createUserDto: CreateUserDTO) {
