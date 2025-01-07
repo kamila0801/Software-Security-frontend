@@ -26,7 +26,7 @@ export class RegisterComponent {
   registerForm: FormGroup;
   loading = false;
   errorMessage: string | null = null;
-  roleOptions = Object.values(Role);
+  roleOptions = [{label: 'Patient', value: 0}, {label: 'Doctor', value: 1}, {label: 'Nurse', value: 2}, {label: 'EmergencyResponder', value: 3}];
 
   private readonly authService = inject(AuthService);
 
@@ -45,7 +45,7 @@ export class RegisterComponent {
           Validators.minLength(8),
           Validators.maxLength(100),
           Validators.pattern(
-              /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.,])[A-Za-z\d@$!%*?&.,]{8,100}$/
+              /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
           ),
         ],
       ],
@@ -61,8 +61,7 @@ export class RegisterComponent {
     this.loading = true;
     this.errorMessage = null;
 
-    // TODO: use this when backend ready:
-    /*this.authService.register(this.registerForm.value).subscribe({
+    this.authService.register(this.registerForm.value).subscribe({
       next: (response) => {
         alert('Registration successful!');
         this.router.navigate(['/login']);
@@ -74,9 +73,6 @@ export class RegisterComponent {
       complete: () => {
         this.loading = false;
       },
-    });*/
-
-    alert('Registration successful!');
-    this.router.navigate(['/login']);
+    });
   }
 }

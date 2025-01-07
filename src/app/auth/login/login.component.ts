@@ -8,6 +8,7 @@ import {Card} from "primeng/card";
 import {IftaLabel} from "primeng/iftalabel";
 import {AuthService} from "../auth.service";
 
+
 @Component({
   selector: 'app-login',
   imports: [
@@ -32,12 +33,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: [
+      password: ['',
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(100),
         Validators.pattern(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.,])[A-Za-z\d@$!%*?&.,]{8,100}$/
+            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
         ),
       ],
     });
@@ -46,10 +47,15 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     const { username, password } = this.loginForm!.value;
 
-    /*this.authService.login(username, password).subscribe({
+    this.authService.login(username, password).subscribe({
       next: (response) => {
         alert('Login successful!');
-        localStorage.setItem('token', response.accessToken);
+        const token = response.accessToken;
+        const decodedToken: any = JSON.parse(atob(token.split('.')[1]));
+        const role = decodedToken.role; // Replace 'role' with the correct key in your token payload
+        localStorage.setItem('username', username);
+        localStorage.setItem('role', role);
+        localStorage.setItem('token', token);
         localStorage.setItem('token-expiration', response.tokenExpiration.toString());
         this.router.navigate(['/records']);
       },
@@ -59,11 +65,6 @@ export class LoginComponent implements OnInit {
       complete: () => {
 
       },
-    });*/
-
-
-    alert('Login successful!');
-    localStorage.setItem('token', 'mock-token-dyausaaivn')
-    this.router.navigate(['/records']);
+    });
   }
 }

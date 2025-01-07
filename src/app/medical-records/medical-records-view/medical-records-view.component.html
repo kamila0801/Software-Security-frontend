@@ -1,5 +1,19 @@
 <div class="flex items-center justify-center min-h-screen">
     <p-card header="Medical Records" class="w-3/4">
+
+        @if(getRole === 'Doctor') {
+            <p-iftalabel class="mb-4">
+                <p-dropdown
+                        id="patients"
+                        [options]="patientsArray()"
+                        class="w-full"
+                        placeholder="Select patient"
+                        (onChange)="loadRecordsByPatientId($event.value)"
+                ></p-dropdown>
+                <label for="patients">Patients</label>
+            </p-iftalabel>
+        }
+
         <p-table [value]="records" [paginator]="true" [rows]="5">
             <ng-template pTemplate="header">
                 <tr>

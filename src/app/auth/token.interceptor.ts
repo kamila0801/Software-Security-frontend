@@ -7,14 +7,13 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class TokenInterceptor implements HttpInterceptor {
   constructor() {}
 
-  intercept(
-      req: HttpRequest<any>,
-      next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Check if the request has withCredentials set to true
     if (req.withCredentials) {
       const token = localStorage.getItem('token'); // Retrieve the token from localStorage (or another storage mechanism)
